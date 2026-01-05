@@ -34,10 +34,13 @@ Then open http://localhost:8888 in your browser.
 
 ### Using Docker Hub image:
 ```bash
-docker run -p 8888:8888 -v $(pwd)/notebooks:/home/jupyter/work <docker_username>/testdockerpython:latest
+docker run -p 8888:8888 -v $(pwd)/notebooks:/home/jupyter/work budisentosa/testdockerpython:latest
 ```
 
-Replace `<docker_username>` with the actual Docker Hub username.
+### Using GitHub Packages image:
+```bash
+docker run -p 8888:8888 -v $(pwd)/notebooks:/home/jupyter/work ghcr.io/budisentosa/testdockerpython:latest
+```
 
 ## Configuration
 
@@ -56,24 +59,54 @@ Mount your local notebooks directory to persist your work:
 docker run -p 8888:8888 -v /path/to/notebooks:/home/jupyter/work testdockerpython:latest
 ```
 
-## Building for Docker Hub
+## Publishing Images
+
+### Pushing to Docker Hub
 
 ```bash
 # Login to Docker Hub
 docker login
 
-# Build with tag
-docker build -t <docker_username>/testdockerpython:1.0.0 .
-
-# Tag latest version
-docker tag <docker_username>/testdockerpython:1.0.0 <docker_username>/testdockerpython:latest
+# Tag the image
+docker tag testdockerpython:latest budisentosa/testdockerpython:latest
+docker tag testdockerpython:latest budisentosa/testdockerpython:1.0.0
 
 # Push to Docker Hub
-docker push <docker_username>/testdockerpython:1.0.0
-docker push <docker_username>/testdockerpython:latest
+docker push budisentosa/testdockerpython:latest
+docker push budisentosa/testdockerpython:1.0.0
 ```
 
-Replace `<docker_username>` with your Docker Hub username.
+### Pushing to GitHub Packages (GitHub Container Registry)
+
+1. **Create a Personal Access Token**:
+   - Go to https://github.com/settings/tokens
+   - Click "Generate new token (classic)"
+   - Select scopes: `write:packages`, `read:packages`
+   - Copy the token
+
+2. **Login to GitHub Container Registry**:
+```bash
+docker login ghcr.io -u budisentosa
+# When prompted for password, paste your Personal Access Token
+```
+
+3. **Tag and push the image**:
+```bash
+# Tag the image
+docker tag testdockerpython:latest ghcr.io/budisentosa/testdockerpython:latest
+docker tag testdockerpython:latest ghcr.io/budisentosa/testdockerpython:1.0.0
+
+# Push to GitHub Container Registry
+docker push ghcr.io/budisentosa/testdockerpython:latest
+docker push ghcr.io/budisentosa/testdockerpython:1.0.0
+```
+
+4. **Make the package public** (optional):
+   - Go to https://github.com/budisentosa?tab=packages
+   - Click on the package `testdockerpython`
+   - Go to "Package settings"
+   - Scroll down and click "Change visibility"
+   - Select "Public"
 
 ## Development
 
