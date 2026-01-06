@@ -17,7 +17,8 @@ services:
 
     volumes:
       # Mount local notebooks directory to container
-      - ./notebooks:/home/jupyter/work
+      # - ./notebooks:/home/jupyter/work
+      - ./kaggle:/home/jupyter/work
       # Optionally persist Jupyter configuration
       # - ./jupyter_config:/home/jupyter/.jupyter
 
