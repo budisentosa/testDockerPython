@@ -28,6 +28,8 @@ services:
       # Optional: Disable token authentication (NOT recommended for production)
       # - JUPYTER_TOKEN=''
 
+    command: jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+
     restart: unless-stopped
 
     healthcheck:
