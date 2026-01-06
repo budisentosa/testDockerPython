@@ -10,6 +10,8 @@ services:
 
     container_name: jupyter-lab
 
+    user: "0:0"  # Run as root to avoid permission issues with Windows volumes
+
     ports:
       - "8888:8888"
 
