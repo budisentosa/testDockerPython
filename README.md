@@ -1,3 +1,5 @@
+docker compose down && docker compose up -d && docker compose logs -f
+
 
 docker build -t testdockerpython:latest .
 docker tag testdockerpython:latest budisentosa/testdockerpython:latest

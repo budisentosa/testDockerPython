@@ -5,13 +5,20 @@ ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PIP_NO_CACHE_DIR=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
-    JUPYTER_ENABLE_LAB=1
+    JUPYTER_ENABLE_LAB=1 \
+    MPLCONFIGDIR=/tmp/matplotlib
 
 # Install system dependencies needed for data science packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     git \
     curl \
+    fonts-dejavu \
+    fonts-dejavu-core \
+    fonts-dejavu-extra \
+    fonts-liberation \
+    fontconfig \
+    && fc-cache -f -v \
     && rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user for running Jupyter
@@ -25,14 +32,20 @@ COPY --chown=jupyter:jupyter requirements.txt .
 
 # Install Python dependencies
 RUN pip install --upgrade pip setuptools wheel && \
-    pip install -r requirements.txt
+    pip install -r requirements.txt && \
+    rm -rf /root/.cache/matplotlib
+
+# Add jupyter and matplotlib configuration directories
+RUN mkdir -p /home/jupyter/.jupyter /home/jupyter/.config/matplotlib
 
 # Copy Jupyter configuration
 COPY --chown=jupyter:jupyter jupyter_notebook_config.py /home/jupyter/.jupyter/jupyter_notebook_config.py
 
-# Add jupyter configuration directory
-RUN mkdir -p /home/jupyter/.jupyter && \
-    chown -R jupyter:jupyter /home/jupyter
+# Copy matplotlib configuration
+COPY --chown=jupyter:jupyter matplotlibrc /home/jupyter/.config/matplotlib/matplotlibrc
+
+# Set proper ownership
+RUN chown -R jupyter:jupyter /home/jupyter
 
 # Switch to non-root user
 USER jupyter
