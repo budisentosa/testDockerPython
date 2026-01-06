@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # Or use the pre-built image from Docker Hub:
+    # image: budisentosa/testdockerpython:latest
+
+    container_name: jupyter-lab
+
+    ports:
+      - "8888:8888"
+
+    volumes:
+      # Mount local notebooks directory to container
+      - ./notebooks:/home/jupyter/work
+      # Optionally persist Jupyter configuration
+      # - ./jupyter_config:/home/jupyter/.jupyter
+
+    environment:
+      - JUPYTER_ENABLE_LAB=1
+      # Optional: Set a custom token (remove for auto-generated token)
+      # - JUPYTER_TOKEN=your-secret-token
+      # Optional: Disable token authentication (NOT recommended for production)
+      # - JUPYTER_TOKEN=''
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888/api"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+    # Resource limits (optional, adjust as needed)
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G

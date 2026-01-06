@@ -14,6 +14,7 @@ jedi==0.19.2
 joblib==1.5.3
 jupyter_client==8.7.0
 jupyter_core==5.9.1
+jupyterlab==4.3.5
 kiwisolver==1.4.9
 kneed==0.8.5
 matplotlib==3.10.8
