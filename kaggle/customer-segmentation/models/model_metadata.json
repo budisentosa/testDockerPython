@@ -1,8 +1,8 @@
 {
   "model_type": "KMeans",
-  "n_clusters": 10,
-  "training_date": "2025-12-20T10:41:57.262680",
+  "n_clusters": 3,
+  "training_date": "2026-01-06T07:03:09.849031",
   "training_size": 100000,
-  "silhouette_score": 0.43348341862981365,
+  "silhouette_score": 0.4757559021628782,
   "random_state": 42
 }
