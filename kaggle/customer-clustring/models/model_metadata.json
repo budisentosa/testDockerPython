@@ -1,0 +1,49 @@
+{
+  "model_version": "1.0.0",
+  "training_date": "2025-12-20 10:01:20",
+  "n_clusters": 5,
+  "n_pca_components": 7,
+  "variance_explained": 0.8574750509102618,
+  "n_samples_trained": 8617,
+  "feature_names": [
+    "BALANCE_FREQUENCY",
+    "ONEOFF_PURCHASES",
+    "INSTALLMENTS_PURCHASES",
+    "PURCHASES_FREQUENCY",
+    "ONEOFF_PURCHASES_FREQUENCY",
+    "PURCHASES_INSTALLMENTS_FREQUENCY",
+    "CASH_ADVANCE_FREQUENCY",
+    "CASH_ADVANCE_TRX",
+    "PURCHASES_TRX",
+    "PRC_FULL_PAYMENT",
+    "Monthly_Avg_Purchase",
+    "Monthly_Avg_Cash",
+    "Limit_Usage",
+    "Pay_to_MinimumPay"
+  ],
+  "categorical_columns": [
+    "Installment_Purchases",
+    "None_Of_the_Purchases",
+    "One_Of_Purchase"
+  ],
+  "segments": {
+    "0": "Big Tickets",
+    "1": "Medium Tickets",
+    "2": "Rare Purchasers",
+    "3": "Beginners",
+    "4": "Risk"
+  },
+  "segment_descriptions": {
+    "0": "High-value customers with frequent large purchases",
+    "1": "Moderate spenders who prefer installment payments",
+    "2": "Infrequent purchasers, occasional one-off payments",
+    "3": "New to credit, building purchase history",
+    "4": "Minimal engagement, potential dormant accounts"
+  },
+  "evaluation_metrics": {
+    "silhouette_score": 0.29126023866573875,
+    "calinski_harabasz_score": 2266.404521066178,
+    "davies_bouldin_score": 1.1490926556329235,
+    "inertia": 52290.36083334615
+  }
+}

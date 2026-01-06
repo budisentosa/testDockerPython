@@ -1,0 +1,52 @@
+{
+  "0": {
+    "name": "Champions",
+    "description": "High value, frequent, recent customers",
+    "strategy": "VIP treatment, retention focus",
+    "actions": [
+      "Dedicated manager",
+      "Premium products",
+      "Referral rewards"
+    ]
+  },
+  "1": {
+    "name": "Loyal Customers",
+    "description": "Regular customers, moderate spending",
+    "strategy": "Upsell opportunities",
+    "actions": [
+      "Product recommendations",
+      "Loyalty rewards",
+      "Cross-sell"
+    ]
+  },
+  "2": {
+    "name": "Potential Loyalists",
+    "description": "Recent customers with potential",
+    "strategy": "Nurture relationship",
+    "actions": [
+      "Onboarding",
+      "Education",
+      "Engagement incentives"
+    ]
+  },
+  "3": {
+    "name": "At Risk",
+    "description": "Previously active, now dormant",
+    "strategy": "Re-activation",
+    "actions": [
+      "Win-back offers",
+      "Surveys",
+      "Special promotions"
+    ]
+  },
+  "4": {
+    "name": "Low Value",
+    "description": "Low frequency and value",
+    "strategy": "Minimal investment",
+    "actions": [
+      "Automation",
+      "Self-service",
+      "Monitor for changes"
+    ]
+  }
+}

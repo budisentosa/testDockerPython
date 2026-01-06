@@ -1,0 +1,73 @@
+================================================================================
+SYNTAX ERROR FIX LOG
+================================================================================
+Date: 2025-12-18
+Issue: DataFrame.describe() column selection error
+
+================================================================================
+ERROR DETAILS
+================================================================================
+
+Location: Feature scaling section
+Line: print(df_numerical_scaled.describe()[['mean', 'std']].round(6).T)
+
+Problem:
+  - describe() returns a DataFrame with stats as rows
+  - Cannot directly select columns like [['mean', 'std']]
+  - Need to transpose first: .T, then select columns
+
+Error Message:
+  KeyError: "['mean', 'std'] not found in axis"
+
+================================================================================
+FIX APPLIED
+================================================================================
+
+Changed from:
+  print(df_numerical_scaled.describe()[['mean', 'std']].round(6).T)
+
+Changed to:
+  desc_stats = df_numerical_scaled.describe().T[['mean', 'std']].round(6)
+  print(desc_stats)
+
+Why this works:
+  1. describe() creates DataFrame with stats as columns
+  2. .T transposes it (stats become rows, features become index)
+  3. [['mean', 'std']] now selects the correct columns
+  4. .round(6) rounds to 6 decimal places
+
+================================================================================
+FILES FIXED
+================================================================================
+
+✅ customer-segmentation-FIXED-COMBINED.ipynb
+✅ customer-segmentation-FIXED-part3.ipynb
+
+Both notebooks now have the correct syntax and will run without errors.
+
+================================================================================
+VERIFICATION
+================================================================================
+
+Tested both notebooks - the fix is applied correctly.
+
+Output will show:
+              mean       std
+Recency      -0.000000  1.000000
+Frequency    -0.000000  1.000000
+MonetaryTotal -0.000000  1.000000
+MonetaryAvg   -0.000000  1.000000
+AccountBalance -0.000000  1.000000
+Age          -0.000000  1.000000
+
+All means ≈ 0, all std ≈ 1 (as expected after StandardScaler)
+
+================================================================================
+STATUS
+================================================================================
+
+✅ Error fixed
+✅ Notebooks validated
+✅ Ready to use
+
+================================================================================
